@@ -4,42 +4,27 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import Example from '../database/models/ExampleModel';
-
-import { Response } from 'superagent';
+import teams from '../database/models/teamsModel';
+import teamsMock from './mocks/teams.mock';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Seu teste', () => {
-  /**
-   * Exemplo do uso de stubs com tipos
-   */
+describe('Testando a model de teams', () => {
+    beforeEach(function () {
+    sinon.stub(teams, 'findAll')
+      .resolves(teamsMock);
+  });
 
-  // let chaiHttpResponse: Response;
-
-  // before(async () => {
-  //   sinon
-  //     .stub(Example, "findOne")
-  //     .resolves({
-  //       ...<Seu mock>
-  //     } as Example);
-  // });
-
-  // after(()=>{
-  //   (Example.findOne as sinon.SinonStub).restore();
-  // })
-
-  // it('...', async () => {
-  //   chaiHttpResponse = await chai
-  //      .request(app)
-  //      ...
-
-  //   expect(...)
-  // });
-
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(true);
+  afterEach(function () {
+    sinon.restore();
+  });
+  it('Retorna a lista completa de teams', async () => {
+    const response = await chai
+    .request(app)
+    .get('/teams');
+    expect(response.status).to.be.equal(200);
+    expect(response.body).to.be.deep.equal(teamsMock);
   });
 });
