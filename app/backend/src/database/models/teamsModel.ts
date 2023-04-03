@@ -2,12 +2,12 @@ import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
 // import OtherModel from './OtherModel';
 
-class teamsModel extends Model {
+class teams extends Model {
   declare id: number;
   declare teamName: string;
 }
 
-teamsModel.init({
+teams.init({
   id: {
     type: INTEGER,
     primaryKey: true,
@@ -35,4 +35,4 @@ teamsModel.init({
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
-export default teamsModel;
+export default teams;
