@@ -26,7 +26,7 @@ users.init({
     type: STRING,
   },
   password: {
-    type: INTEGER,
+    type: STRING,
   },
 }, {
   underscored: true,
