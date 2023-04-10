@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Service from '../services/usersService';
+import Service from '../services/usersServices';
 import Controller from '../controllers/usersController';
 import Model from '../models/usersModel';
 import validateToken from '../middleware/validateToken';
