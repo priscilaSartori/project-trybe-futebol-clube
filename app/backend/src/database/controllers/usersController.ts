@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import UserService from '../services/usersService';
+import UserService from '../services/usersServices';
 import Token from '../utils/jwt.util';
 
 class usersController {
