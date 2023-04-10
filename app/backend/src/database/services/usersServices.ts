@@ -11,12 +11,12 @@ class UserService {
   public async getByEmail(email: string, password: string) {
     const user = await this.userModel.findOne({ where: { email } });
     if (!user) {
-      return { type: 401, message: 'Invalid email or password' };
+      return null;
     }
 
     const isPassword = bcrypt.compareSync(password, user.password);
     if (!isPassword) {
-      return { type: 401, message: 'Invalid email or password' };
+      return null;
     }
     return { type: null, message: user };
   }

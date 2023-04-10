@@ -8,9 +8,9 @@ class usersController {
   public login = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { email, password } = req.body;
-      const { type, message } = await this.service.getByEmail(email, password);
-      if (type) {
-        return res.status(type).json(message);
+      const result = await this.service.getByEmail(email, password);
+      if (!result) {
+        return res.status(401).json({ message: 'Invalid email or password' });
       }
       const token = Token.createToken({ email, password });
       return res.status(200).json({ token });

@@ -6,6 +6,10 @@ export default class validateToken {
     if (!email || !password) {
       return res.status(400).json({ message: 'All fields must be filled' });
     }
+    const validationEmail = /\S+@\S+\.\S+/;
+    if (!validationEmail.test(email) || password.length < 6) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
     next();
   }
 }
