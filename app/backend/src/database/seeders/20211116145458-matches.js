@@ -1,7 +1,6 @@
 module.exports = {
   up: async (queryInterface) => {
-    await queryInterface.bulkInsert(
-      'matches',
+    await queryInterface.bulkInsert('matches',
       [
         {
           home_team_id: 16,
