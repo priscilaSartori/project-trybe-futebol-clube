@@ -1,10 +1,10 @@
 import { sign, verify } from 'jsonwebtoken';
-import { ILogin } from '../interfaces/ILogin';
+import { IUser } from '../interfaces/ILogin';
 
 const secret = process.env.JWT_SECRET || 'jwt_secret';
 
-const createToken = (login: ILogin) => {
-  const token = sign(login, secret, {
+const createToken = (login: IUser) => {
+  const token = sign({ login }, secret, {
     expiresIn: '1d',
     algorithm: 'HS256',
   });

@@ -12,11 +12,16 @@ class usersController {
       if (!result) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
-      const token = Token.createToken({ email, password });
+      const token = Token.createToken({ email, password, role: result.role });
       return res.status(200).json({ token });
     } catch (error) {
       next(error);
     }
+  };
+
+  public role = async (req: Request, res: Response) => {
+    const role = req.body.data;
+    res.status(200).json({ role: role.login.role });
   };
 }
 

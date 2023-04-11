@@ -1,6 +1,7 @@
 import { ModelStatic } from 'sequelize';
 import * as bcrypt from 'bcryptjs';
 import UserModel from '../models/usersModel';
+import { IUser } from '../interfaces/ILogin';
 
 class UserService {
   private userModel: ModelStatic<UserModel>;
@@ -8,7 +9,7 @@ class UserService {
     this.userModel = userModel;
   }
 
-  public async getByEmail(email: string, password: string) {
+  public async getByEmail(email: string, password: string): Promise<IUser | null> {
     const user = await this.userModel.findOne({ where: { email } });
     if (!user) {
       return null;
@@ -18,7 +19,7 @@ class UserService {
     if (!isPassword) {
       return null;
     }
-    return { type: null, message: user };
+    return user;
   }
 }
 export default UserService;
