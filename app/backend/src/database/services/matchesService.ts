@@ -52,5 +52,16 @@ class MatchesService {
   public async updateMatches(id: number, homeTeamGoals: number, awayTeamGoals: number) {
     await this.matchesModel.update({ homeTeamGoals, awayTeamGoals }, { where: { id: Number(id) } });
   }
+
+  public async createMatches(
+    homeTeamId: number,
+    awayTeamId: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ) {
+    await this.matchesModel.create({
+      homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals, inProgress: true,
+    });
+  }
 }
 export default MatchesService;
