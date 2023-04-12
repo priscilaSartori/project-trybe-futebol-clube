@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import MatchesService from '../services/matchesService';
+import TeamService from '../services/teamsService';
 
 class MatchesController {
-  constructor(private matchesService: MatchesService) { }
+  constructor(private matchesService: MatchesService, private TeamsService: TeamService) { }
 
   public getAll = async (req: Request, res: Response, next: NextFunction) => {
     const { inProgress } = req.query;
@@ -42,8 +43,7 @@ class MatchesController {
   public createMatches = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const newMatch = req.body;
-      const matches = await this.matchesService
-        .createMatches(newMatch);
+      const matches = await this.matchesService.createMatches(newMatch);
       res.status(201).json(matches);
     } catch (error) {
       next(error);
