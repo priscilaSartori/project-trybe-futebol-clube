@@ -1,6 +1,7 @@
 import { ModelStatic } from 'sequelize';
 import MatchesModel from '../models/matchesModel';
 import TeamsModel from '../models/teamsModel';
+// import { ITeam } from '../interfaces/ITeam';
 
 class MatchesService {
   private matchesModel: ModelStatic<MatchesModel>;
@@ -42,6 +43,10 @@ class MatchesService {
         }],
     });
     return matches;
+  }
+
+  public async update(id: number) {
+    await this.matchesModel.update({ inProgress: false }, { where: { id: Number(id) } });
   }
 }
 export default MatchesService;
