@@ -40,10 +40,10 @@ class MatchesController {
   };
 
   public createMatches = async (req: Request, res: Response, next: NextFunction) => {
-    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = req.body;
     try {
+      const newMatch = req.body;
       const matches = await this.matchesService
-        .createMatches(homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals);
+        .createMatches(newMatch);
       res.status(201).json(matches);
     } catch (error) {
       next(error);
