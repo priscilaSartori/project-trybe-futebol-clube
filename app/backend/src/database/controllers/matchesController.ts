@@ -17,6 +17,16 @@ class MatchesController {
       next(error);
     }
   };
+
+  public update = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+      await this.matchesService.update(Number(id));
+      res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MatchesController;
