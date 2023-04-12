@@ -38,6 +38,17 @@ class MatchesController {
       next(error);
     }
   };
+
+  public createMatches = async (req: Request, res: Response, next: NextFunction) => {
+    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = req.body;
+    try {
+      const matches = await this.matchesService
+        .createMatches(homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals);
+      res.status(201).json(matches);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MatchesController;
