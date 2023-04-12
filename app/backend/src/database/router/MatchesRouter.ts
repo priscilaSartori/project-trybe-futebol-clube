@@ -11,5 +11,6 @@ const matchesController = new Controller(matchesService);
 const matchesRouter = Router();
 matchesRouter.get('/', matchesController.getAll);
 matchesRouter.patch('/:id/finish', validateToken.validate, matchesController.update);
+matchesRouter.patch('/:id', validateToken.validate, matchesController.updateMatches);
 
 export default matchesRouter;
