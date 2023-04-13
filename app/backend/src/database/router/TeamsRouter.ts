@@ -7,7 +7,7 @@ const teamsService = new Service(Model);
 const teamsController = new Controller(teamsService);
 
 const teamsRouter = Router();
-teamsRouter.get('/', (req, res, next) => teamsController.getAll(req, res, next));
-teamsRouter.get('/:id', (req, res, next) => teamsController.getById(req, res, next));
+teamsRouter.get('/', (req, res) => teamsController.getAll(req, res));
+teamsRouter.get('/:id', (req, res) => teamsController.getById(req, res));
 
 export default teamsRouter;
