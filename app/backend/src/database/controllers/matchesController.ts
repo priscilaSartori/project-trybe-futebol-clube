@@ -9,10 +9,10 @@ class MatchesController {
     const { inProgress } = req.query;
     if (inProgress) {
       const matchesInProgress = await this.matchesService.getInProgress(inProgress as string);
-      res.status(200).json(matchesInProgress);
+      return res.status(200).json(matchesInProgress);
     }
     const matches = await this.matchesService.getAll();
-    res.status(200).json(matches);
+    return res.status(200).json(matches);
   };
 
   public update = async (req: Request, res: Response) => {
