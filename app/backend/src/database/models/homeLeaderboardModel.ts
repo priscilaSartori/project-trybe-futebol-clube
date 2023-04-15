@@ -1,7 +1,8 @@
 const home = `
-SELECT teams.team_name,
-SUM(
-  CASE
+SELECT teams.team_name AS name,
+  COUNT(matches.id) AS totalGames,
+  SUM(
+    CASE
       WHEN matches.home_team_goals > matches.away_team_goals THEN 3
       WHEN matches.home_team_goals = matches.away_team_goals THEN 1
       ELSE 0
@@ -27,11 +28,20 @@ SUM(
   ) AS totalLosses,
   SUM(matches.home_team_goals) AS goalsFavor,
   SUM(matches.away_team_goals) AS goalsOwn,
+  SUM(matches.home_team_goals - matches.away_team_goals) AS goalsBalance,
+  FORMAT(
+    (SUM(
+      CASE
+        WHEN matches.home_team_goals > matches.away_team_goals THEN 3
+        WHEN matches.home_team_goals = matches.away_team_goals THEN 1
+        ELSE 0
+      END
+    ) / (COUNT(matches.id) * 3)) * 100, 2
+  ) AS efficiency
 FROM teams
 INNER JOIN matches ON teams.id = matches.home_team_id
 INNER JOIN teams AS away_teams ON away_teams.id = matches.away_team_id
 WHERE matches.in_progress = false
-COUNT(matches.id) AS totalGames,
 GROUP BY teams.id
 ORDER BY
     totalPoints DESC,
@@ -39,5 +49,4 @@ ORDER BY
     goalsBalance DESC,
     goalsFavor DESC
 `;
-
 export default home;
