@@ -211,7 +211,7 @@ describe('Testando matches', () => {
   });
 
   // it('Testa se é possível finalizar uma partida', async () => {
-    // beforeEach(function () {
+  // beforeEach(function () {
     //   sinon.stub(matches, 'update')
     //   .resolves()
     // });

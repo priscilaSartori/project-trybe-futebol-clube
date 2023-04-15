@@ -1,7 +1,7 @@
 import { ModelStatic } from 'sequelize';
 import MatchesModel from '../models/matchesModel';
 import TeamsModel from '../models/teamsModel';
-import { IMatches } from '../interfaces/IMatches';
+import IMatches from '../interfaces/IMatches';
 
 class MatchesService {
   private matchesModel: ModelStatic<MatchesModel>;
